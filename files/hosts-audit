@@ -1,0 +1,8 @@
+[audit_admin] 
+sdcgisazapmdw22 ansible_host=10.193.176.60 ansible_port=8422 ansible_ssh_user=user ansible_ssh_pass=mtogov123 ansible_become_pass=mtogov123
+
+[audit_as01] 
+sdcgisazapmdw22 ansible_host=10.193.176.60 ansible_port=8422 ansible_ssh_user=user ansible_ssh_pass=mtogov123 ansible_become_pass=mtogov123
+
+[audit_as02] 
+#sdcgisazapmdw22 ansible_host=10.193.176.60 ansible_port=8522 ansible_ssh_user=user ansible_ssh_pass=mtogov123 ansible_become_pass=mtogov123

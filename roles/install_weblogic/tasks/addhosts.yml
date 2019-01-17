@@ -1,0 +1,9 @@
+---    
+    
+- name: Write hostname and IP address to hosts file
+  lineinfile: 
+     dest: /etc/hosts 
+     regexp: "{{hostvars[item].ansible_host}}"
+     line: "{{hostvars[item].ansible_host}} {{hostvars[item].inventory_hostname}}"      
+  with_items: "{{groups.all}}"
+  

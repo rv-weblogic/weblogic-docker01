@@ -1,0 +1,33 @@
+connect('{{ weblogic_admin_user }}','{{ weblogic_admin_password }}', '{{ weblogic_admin_url }}')
+
+edit()
+startEdit()
+
+# {{ name_prefix }}HostAdmin = the new WebLogic Machine
+cmo.createUnixMachine('{{ weblogic_domain_name }}HostAdmin')
+
+cd('/Machines/{{ weblogic_domain_name }}HostAdmin/NodeManager/{{ weblogic_domain_name }}HostAdmin')
+cmo.setListenAddress('172.17.0.2')
+cmo.setListenPort({{ unique_id + 20000|int }})
+
+cd('/Servers/{{ weblogic_domain_name }}Admin')
+cmo.setMachine(getMBean('/Machines/{{ weblogic_domain_name }}HostAdmin'))
+
+cd('/')
+cmo.setProductionModeEnabled(false)
+
+cd('/SecurityConfiguration/{{ weblogic_domain_name }}')
+cmo.setNodeManagerUsername('{{ domain_account.username }}')
+setEncrypted('NodeManagerPassword', '{{ security_general.nodemanager }}', '{{ security_general.config }}', '{{ security_general.secret }}')
+
+cd('/')
+cmo.setProductionModeEnabled(true)
+
+cd('/Servers/{{ weblogic_domain_name }}Admin')
+cmo.setStagingDirectoryName('{{ domain_account.home }}/servers/{{ weblogic_domain_name }}Admin/stage')
+
+save()
+activate()
+
+disconnect()
+exit()
