@@ -1,4 +1,9 @@
----     
+---  
+
+- command: "echo {{weblogic_servers[0].instance_name}} {{weblogic_servers[1].instance_name}} {{weblogic_servers[2].instance_name}}"
+  register: x
+- debug: var=x.stdout_lines 
+- meta: end_play   
               
 - name: create folder servers/{{ weblogic_domain_name }}Admin/security/
   file: 
@@ -44,7 +49,7 @@
   register: admin_start
   when: start_old | default("") == "Y"
      
-- name: Expected {{ weblogic_servers[server].instance_address }} to be listening on {{ weblogic_servers[server].instance_port }}
+- name: Expected instance_address to be listening on instance_port
   wait_for:
       host: "172.17.0.2"
       port: "{{ unique_id + 10000|int }}"

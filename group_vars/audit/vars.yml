@@ -85,41 +85,41 @@ setDomainEnv_sh: "{{ domain_account.home }}/bin/setDomainEnv.sh"
 # Per Domain Data  --below should change according to the Weblogic Domain. #
 ############################################################################ 
 
-weblogic_servers: {
-    admin: {
+weblogic_servers: [
+    {
         instance_name: "{{ weblogic_domain_name }}Admin",
-        instance_address: "{{hostvars[groups[weblogic_domain_name + '_admin'][0]].inventory_hostname}}",
+        instance_address: "172.17.0.2",
         instance_port: "{{ unique_id + 10000|int }}",
-        node_manager_address: "{{hostvars[groups[weblogic_domain_name + '_admin'][0]].inventory_hostname}}",
+        node_manager_address: "172.17.0.2",
         node_manager_port: "{{ unique_id + 20000|int }}",
         user_mem_args_value: "-Djava.security.egd=file:/dev/./urandom -XX:MaxPermSize=512M -Dweblogic.security.SSL.ignoreHostnameVerification=true",
         machine_name: "{{ weblogic_domain_name }}HostAdmin",
         file_store: "",
         jms_server: "",
     },
-    as01: {
+    {
         instance_name: "{{ weblogic_domain_name }}As01",
-        instance_address: "{{hostvars[groups[weblogic_domain_name + '_as01'][0]].inventory_hostname}}",
+        instance_address: "172.17.0.3",
         instance_port: "{{ unique_id + 1|int }}",
-        node_manager_address: "{{hostvars[groups[weblogic_domain_name + '_as01'][0]].inventory_hostname}}",
+        node_manager_address: "172.17.0.3",
         node_manager_port: "{{ unique_id + 20001|int }}",
         user_mem_args_value: "-Djava.security.egd=file:/dev/./urandom -XX:MaxPermSize=512M",
         machine_name: "{{ weblogic_domain_name }}HostAs01",
         file_store: "{{ weblogic_domain_name }}As01FileStore",
         jms_server: "{{ weblogic_domain_name }}As01JMSServer",
     },
-    as02: {
+    {
         instance_name: "{{ weblogic_domain_name }}As02",
-        instance_address: "{{hostvars[groups[weblogic_domain_name + '_as02'][0]].inventory_hostname}}",
+        instance_address: "172.17.0.4",
         instance_port: "{{ unique_id + 2|int }}",
-        node_manager_address: "{{hostvars[groups[weblogic_domain_name + '_as02'][0]].inventory_hostname}}",
+        node_manager_address: "172.17.0.4",
         node_manager_port: "{{ unique_id + 20002|int }}",
         user_mem_args_value: "-Djava.security.egd=file:/dev/./urandom -XX:MaxPermSize=512M",
         machine_name: "{{ weblogic_domain_name }}HostAs02",
         file_store: "{{ weblogic_domain_name }}As02FileStore",
         jms_server: "{{ weblogic_domain_name }}As02JMSServer",
     },
-}
+]
           
 weblogic_app_url: https://sdcdev01stal01ltcrus.blob.core.windows.net/tso/Midtier/Software/weblogic.app/
 weblogic_app_file: weblogic_audit_app.zip 

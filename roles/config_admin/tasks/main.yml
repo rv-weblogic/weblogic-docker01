@@ -1,11 +1,11 @@
 ---
 
-- include_tasks: common.yml
+#- include_tasks: common.yml
 
 - block:
     # create domain offline
-    - include_tasks: create_domain.yml
-      when: task_type | default("") == "create_domain"
+    #- include_tasks: create_domain.yml
+    #  when: task_type | default("") == "create_domain"
     # configure add machine and set security/general online 
     #- include_tasks: add_machine.yml
     #  when: task_type | default("") == "add_machine"
@@ -23,7 +23,7 @@
       when: task_type | default("") == "config_files"
   when: server | default("") == "admin"
 
-- include_tasks: common_admin.yml
+#- include_tasks: common_admin.yml
   when: task_type | default("") == "start_admin" or task_type | default("") == "stop_admin" or task_type | default("") == "restart_admin"
 
 - block: 
